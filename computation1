@@ -1,0 +1,36 @@
+% MUSCL computation
+J = 100;
+N = 400;
+T = 1.0;
+dx = 1.0/J;
+x = 0.0: dx: 1.0;
+u0 = initialData(x);
+uT = improvedEuler(J, N, T);
+J = 200;
+N = 800;
+T = 1.0;
+dx2 = 1.0/J;
+x2 = 0.0: dx2: 1.0;
+uT2 = improvedEuler(J, N, T);
+J = 500;
+N = 2000;
+T = 1.0;
+dx3 = 1.0/J;
+x3 = 0.0: dx3: 1.0;
+uT3 = improvedEuler(J, N, T);
+figure(1);
+plot(x, u0, ':b', 'LineWidth', 2);
+hold on;
+plot(x, uT, '-.r', 'LineWidth', 2);
+hold on;
+plot(x2, uT2, '--m', 'LineWidth', 2);
+hold on;
+plot(x3, uT3, '-k', 'LineWidth', 2);
+hold off;
+legend('initial data', '$dt = 2.5 \times 10^{-3}, dx = 0.01$', ...
+'$dt = 1.25 \times 10^{-3}, dx = 0.005$', ...
+'$dt = 5 \times 10^{-4}, dx = 0.002$');
+xlabel('x');
+ylabel('u');
+axis([0 1 -0.1 2.1]);
+grid on;
